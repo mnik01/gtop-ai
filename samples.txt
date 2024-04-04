@@ -1,0 +1,22 @@
+Q:
+{
+    "input_cv": "Name: Maxim Nikonov, Age: 22, Position: Sr. Web Designer at kandasoftware. Figma Adobe XD 3 years of experience",
+    "input_job": "UX UI Designer at ACME inc. We're looking for UX UI Designer with 4 years of experience and 2 years of experience with figma"
+}
+A:
+{
+    "desciption": "The CV matches the job description to a certain extent because the candidate has experience with Figma for 3 years, which is a requirement for the job. However, the job requires 2 years of experience with Figma, and the candidate has 3 years of experience which is more than required. Other skills like Adobe XD are not mentioned in the job description, so they do not contribute to the match percentage."
+    "percentage": "60%",
+}
+
+
+Q:
+{
+    "input_cv": "Name: Maxim Nikonov, Age: 22, Position: Sr. Frontend developer at kandasoftware. React Typescript",
+    "input_job": "UX UI Designer at ACME inc. We're looking for UX UI Designer with 4 years of experience and 2 years of experience with figma"
+}
+A:
+{
+    "desciption": "The CV and the job description have no relevant skills or experience that match. The CV mentions experience in frontend development using React and TypeScript, while the job is looking for a UX UI Designer with experience in Figma and a different set of requirements."
+    "percentage": "0%",
+}

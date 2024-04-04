@@ -11,6 +11,14 @@ import z from "zod";
  * Learn more at https://developers.cloudflare.com/workers/
  */
 
+const HEADERS = {
+	"Content-Type": "application/json",
+	"Access-Control-Allow-Origin": "*",
+	"Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+	"Access-Control-Allow-Headers": "*",
+	"Access-Control-Max-Age": "86400",
+}
+
 export interface Env {
 	OPENAI_API_KEY: string;
 	// Example binding to KV. Learn more at https://developers.cloudflare.com/workers/runtime-apis/kv/
@@ -77,24 +85,15 @@ export default {
 				return new Response(JSON.stringify({
 					description,
 					percentage,
-				}), {
-					status: 200,
-					headers: {
-						"Content-Type": "application/json",
-						"Access-Control-Allow-Origin": "*",
-						"Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-						"Access-Control-Allow-Headers": "*",
-						"Access-Control-Max-Age": "86400",
-					}
-				});
+				}), { status: 200, headers: HEADERS });
 			} catch (error) {
 				console.error(error);
-				return new Response(JSON.stringify({ error: JSON.stringify(error), msg }), { status: 500, headers: { "Content-Type": "application/json" } });
+				return new Response(JSON.stringify({ error: JSON.stringify(error), msg }), { status: 500, headers: HEADERS });
 			}
 		} catch (e) {
 			console.error(e);
 			// @ts-expect-error
-			return new Response(JSON.stringify({ error: JSON.stringify(e?.message || e) }), { status: 500, headers: { "Content-Type": "application/json" } });
+			return new Response(JSON.stringify({ error: JSON.stringify(e?.message || e) }), { status: 500, headers: HEADERS });
 		}
 	},
 };

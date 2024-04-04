@@ -39,6 +39,10 @@ export interface Env {
 
 export default {
 	async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+		if (request.method === "OPTIONS") {
+			return new Response(null, { status: 204, headers: HEADERS });
+		}
+
 		try {
 			const body = await request.json();
 			const { input_cv, input_job } = z.object({

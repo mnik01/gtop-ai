@@ -29,7 +29,7 @@ Output (your response):
 	"percentage": "0",
 }
 
-Respond only with valid JSON object with two fields as in examples above.
+Respond only with valid JSON object with two fields as in examples above. Use the keys "description" and "percentage" to provide the response.
 `
 
 export const getUserPropmt = (inputCV: string, inputJob: string) => `{"input_cv": "${JSON.stringify(inputCV)}","input_job": "${JSON.stringify(inputJob)}"}`

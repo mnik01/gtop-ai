@@ -62,19 +62,26 @@ export default {
 			});
 
 			const msg = response?.choices.at(0)?.message?.content || 'No response';
-			const { percentage, description } = z.object({
-				percentage: z.string(),
-				description: z.string(),
-			}).parse(JSON.parse(msg));
+			console.log(msg)
 
-			if (msg && !percentage || !description) {
-				throw new Error('Unable to parse response from OpenAI API');
+			try {
+				const { percentage, description } = z.object({
+					percentage: z.string(),
+					description: z.string(),
+				}).parse(JSON.parse(msg));
+
+				if (msg && !percentage || !description) {
+					throw new Error('Unable to parse response from OpenAI API: ' + msg);
+				}
+
+				return new Response(JSON.stringify({
+					description,
+					percentage,
+				}), { status: 200, headers: { "Content-Type": "application/json" } });
+			} catch (error) {
+				console.error(error);
+				return new Response(JSON.stringify({ error: JSON.stringify(error), msg }), { status: 500, headers: { "Content-Type": "application/json" } });
 			}
-
-			return new Response(JSON.stringify({
-				description,
-				percentage,
-			}), { status: 200, headers: { "Content-Type": "application/json" } });
 		} catch (e) {
 			console.error(e);
 			// @ts-expect-error

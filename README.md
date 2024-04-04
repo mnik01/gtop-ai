@@ -7,7 +7,7 @@ Match means -- how attached CV relates to given job discription.
 
 1. Install packages `pnpm i`
 2. Start local dev server `pnpm dev`
-3. Push changes to main branch
+3. Deploy changes using `npx wrangler deploy`
 4. See updated result at https://gtop-ai.mnik01.workers.dev/
 
 ## Tests

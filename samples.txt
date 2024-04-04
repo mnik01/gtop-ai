@@ -5,7 +5,7 @@ Q:
 }
 A:
 {
-    "desciption": "The CV matches the job description to a certain extent because the candidate has experience with Figma for 3 years, which is a requirement for the job. However, the job requires 2 years of experience with Figma, and the candidate has 3 years of experience which is more than required. Other skills like Adobe XD are not mentioned in the job description, so they do not contribute to the match percentage."
+    "description": "The CV matches the job description to a certain extent because the candidate has experience with Figma for 3 years, which is a requirement for the job. However, the job requires 2 years of experience with Figma, and the candidate has 3 years of experience which is more than required. Other skills like Adobe XD are not mentioned in the job description, so they do not contribute to the match percentage."
     "percentage": "60%",
 }
 
@@ -17,6 +17,6 @@ Q:
 }
 A:
 {
-    "desciption": "The CV and the job description have no relevant skills or experience that match. The CV mentions experience in frontend development using React and TypeScript, while the job is looking for a UX UI Designer with experience in Figma and a different set of requirements."
+    "description": "The CV and the job description have no relevant skills or experience that match. The CV mentions experience in frontend development using React and TypeScript, while the job is looking for a UX UI Designer with experience in Figma and a different set of requirements."
     "percentage": "0%",
 }

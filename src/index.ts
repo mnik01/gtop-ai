@@ -72,8 +72,8 @@ export default {
 			}
 
 			return new Response(JSON.stringify({
-				percentage,
 				description,
+				percentage,
 			}), { status: 200, headers: { "Content-Type": "application/json" } });
 		} catch (e) {
 			console.error(e);

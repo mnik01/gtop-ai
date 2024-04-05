@@ -1,0 +1,58 @@
+{
+	"info": {
+		"_postman_id": "344a8b6d-c714-4726-9f6d-c08f17d35b6d",
+		"name": "gTOP AI modules",
+		"description": "This collection stores 2 modules that created for [gTOP](https://platform.kandasoft.com/personal-profile)\n\n## CV matcher\n\nThis API function accepts 2 texts (job description and employee cv) and compares them to see how they related. Based on that it gives match percentage.\n\n## CV modifier\n\nTODO",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13683941"
+	},
+	"item": [
+		{
+			"name": "cv matcher",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Response status code is 200', function () {",
+							"    pm.response.to.have.status(200);",
+							"})",
+							"",
+							"pm.test('Response has the required fields - description and percentage', function () {",
+							"    const responseData = pm.response.json();",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.description).to.exist.and.to.be.a('string');",
+							"    pm.expect(responseData.percentage).to.exist.and.to.be.a('string');",
+							"})",
+							"",
+							"pm.test('Content-Type header is \\'application/json\\'', function () {",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.equal('application/json');",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"input_cv\": \"Name: Maxim Nikonov, Age: 22, Position: Sr. Web Designer at kandasoftware. Figma Adobe XD 3 years of experience\",\n    \"input_job\": \"UX UI Designer at ACME inc. We're looking for UX UI Designer with 4 years of experience and 2 years of experience with figma\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_URL}}",
+					"host": [
+						"{{API_URL}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

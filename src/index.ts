@@ -50,7 +50,17 @@ export default {
 			}).parse(body);
 
 			// Check cache
-			const cacheKey = `${input_cv}-${input_job}`;
+			const input_cv_hash = crypto.subtle.digest('SHA-256', new TextEncoder().encode(input_cv)).then(hashBuffer => {
+				const hashArray = Array.from(new Uint8Array(hashBuffer));
+				return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+			}
+			);
+			const input_job_hash = crypto.subtle.digest('SHA-256', new TextEncoder().encode(input_job)).then(hashBuffer => {
+				const hashArray = Array.from(new Uint8Array(hashBuffer));
+				return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+			}
+			);
+			const cacheKey = `${input_cv_hash}-${input_job_hash}`;
 			const cached = await env.MATCHER_CACHE.get(cacheKey);
 
 			if (cached) {

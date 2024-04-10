@@ -21,8 +21,7 @@ const HEADERS = {
 
 export interface Env {
 	OPENAI_API_KEY: string;
-	// Example binding to KV. Learn more at https://developers.cloudflare.com/workers/runtime-apis/kv/
-	// MY_KV_NAMESPACE: KVNamespace;
+	MATCHER_CACHE: KVNamespace;
 	//
 	// Example binding to Durable Object. Learn more at https://developers.cloudflare.com/workers/runtime-apis/durable-objects/
 	// MY_DURABLE_OBJECT: DurableObjectNamespace;
@@ -49,6 +48,14 @@ export default {
 				input_cv: z.string(),
 				input_job: z.string(),
 			}).parse(body);
+
+			// Check cache
+			const cacheKey = `${input_cv}-${input_job}`;
+			const cached = await env.MATCHER_CACHE.get(cacheKey);
+
+			if (cached) {
+				return new Response(cached, { status: 200, headers: HEADERS });
+			}
 
 			const openai = new OpenAI({
 				apiKey: env.OPENAI_API_KEY,
@@ -85,6 +92,12 @@ export default {
 				if (msg && !percentage || !description) {
 					throw new Error('Unable to parse response from OpenAI API: ' + msg);
 				}
+
+				// Cache response
+				await env.MATCHER_CACHE.put(cacheKey, JSON.stringify({
+					description,
+					percentage,
+				}), { expirationTtl: 60 * 60 * 24 });
 
 				return new Response(JSON.stringify({
 					description,

@@ -14,7 +14,9 @@ compatibility_flags = ["nodejs_compat"]
 # [[kv_namespaces]]
 # binding = "MY_KV_NAMESPACE"
 # id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-
+kv_namespaces = [
+    { binding = "MATCHER_CACHE", id = "4c0b5e28f32847a3a43fb20923a397a3" }
+]
 # Bind an R2 Bucket. Use R2 to store arbitrarily large blobs of data, such as files.
 # Docs: https://developers.cloudflare.com/r2/api/workers/workers-api-usage/
 # [[r2_buckets]]

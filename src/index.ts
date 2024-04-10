@@ -50,12 +50,12 @@ export default {
 			}).parse(body);
 
 			// Check cache
-			const input_cv_hash = crypto.subtle.digest('SHA-256', new TextEncoder().encode(input_cv)).then(hashBuffer => {
+			const input_cv_hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(input_cv)).then(hashBuffer => {
 				const hashArray = Array.from(new Uint8Array(hashBuffer));
 				return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 			}
 			);
-			const input_job_hash = crypto.subtle.digest('SHA-256', new TextEncoder().encode(input_job)).then(hashBuffer => {
+			const input_job_hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(input_job)).then(hashBuffer => {
 				const hashArray = Array.from(new Uint8Array(hashBuffer));
 				return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 			}

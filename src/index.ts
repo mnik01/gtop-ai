@@ -72,7 +72,7 @@ export default {
 			});
 
 			const response = await openai.chat.completions.create({
-				model: "gpt-3.5-turbo",
+				model: "ft:gpt-3.5-turbo-0125:personal:gtop-matcher:9DCPuj1n",
 				messages: [
 					{
 						"role": "system",
@@ -83,15 +83,15 @@ export default {
 						"content": getUserPropmt(input_cv, input_job),
 					},
 				],
-				temperature: 0,
+				temperature: 0.25,
 				max_tokens: 256,
 				top_p: 1,
-				frequency_penalty: 0,
+				frequency_penalty: 0.15,
 				presence_penalty: 0,
 			});
 
 			const msg = response?.choices.at(0)?.message?.content || 'No response';
-			console.log(msg)
+			console.log(msg);
 
 			try {
 				const { percentage, description } = z.object({

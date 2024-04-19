@@ -1,8 +1,8 @@
 
 import z from "zod";
 import { Env } from "..";
-import { SYSTEM_PROMPT, getUserPropmt } from "./prompts";
-import { ChatGPTStrategy, LLM } from "../utils/llm";
+import { SYSTEM_PROMPT_WITH_EXAMPLE, getUserPropmt } from "./prompts";
+import { GroqStrategy, LLM } from "../utils/llm";
 import { getHash } from "../utils/getHash";
 
 export const matcherHandler = async (request: Request, env: Env): Promise<string> => {
@@ -19,12 +19,12 @@ export const matcherHandler = async (request: Request, env: Env): Promise<string
 
 	if (cached) return cached;
 
-	const llm = new LLM(new ChatGPTStrategy({
-		apiKey: env.OPENAI_API_KEY,
-		modelName: 'ft:gpt-3.5-turbo-0125:personal:gtop-matcher:9DCPuj1n',
+	const llm = new LLM(new GroqStrategy({
+		apiKey: env.GROQ_API_KEY,
+		modelName: 'llama3-8b-8192',
 	}));
 
-	const response = await llm.message(SYSTEM_PROMPT, getUserPropmt(input_cv, input_job));
+	const response = await llm.message(SYSTEM_PROMPT_WITH_EXAMPLE, getUserPropmt(input_cv, input_job));
 	console.log(response);
 
 	const { percentage, description } = z.object({

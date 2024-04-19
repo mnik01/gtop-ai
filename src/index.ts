@@ -11,6 +11,7 @@ const HEADERS = {
 
 export interface Env {
 	OPENAI_API_KEY: string;
+	GROQ_API_KEY: string;
 	MATCHER_CACHE: KVNamespace;
 }
 
